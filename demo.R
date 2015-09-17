@@ -11,7 +11,7 @@ graph_demo <- function(zip) {
     
     d$zip <- factor(d$zip)
     gg <- ggplot(d, aes(x = age, y = total))
-    gg + geom_bar(stat = "identity") + facet_wrap( ~ zip, ncol = 3) + coord_flip() + theme_bw()
+    gg + geom_bar(stat = "identity") + facet_wrap( ~ zip) + coord_flip() + theme_bw()
     
 }
 
