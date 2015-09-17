@@ -1,0 +1,65 @@
+---
+title: "Real estate analysis"
+author: "Jack"
+date: "September 17, 2015"
+output: 
+  slidy_presentation: 
+    fig_height: 7.5
+    fig_width: 9
+---
+
+```{r, echo = F}
+source("demo.R")
+source("earning.R")
+source("earning_all.R")
+source("housing.R")
+
+```
+
+```{r, echo = F, variable}
+zip <- c(63130, 21231)
+zip <- as.character(zip)
+
+```
+
+## Who lives there?
+For zip code `r zip`:
+
+```{r, message = F}
+graph_demo(zip)
+
+```
+
+## How much do they make (full time)?
+For full time employees in zip code `r zip`:
+```{r}
+earn(zip)
+
+```
+
+## How much do they make (everyone)?
+For everyone in zip code `r zip`:
+```{r}
+earn_all(zip)
+```
+
+## Where do they live? Renter vs. owner occupied
+For zip code `r zip` the renter vs. owner occupied property:
+```{r}
+housing(zip)
+```
+
+## How many people live in a household?
+For zip code `r zip` the renter vs. owner occupied property have typical size of:
+```{r}
+housing(zip, topic = "household")
+```
+
+## How much do they pay for rent?
+For zip code `r zip` the typical rent (occupied properties and asking rent):
+```{r}
+housing(zip, topic = "housing")
+```
+
+
+

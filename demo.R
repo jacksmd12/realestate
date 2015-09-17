@@ -3,15 +3,15 @@ graph_demo <- function(zip) {
     require(lattice)
     
     d <- NULL
+    
     for (i in 1:length(zip)) {
         temp <- demo(zip[i])
-        d <- rbind(d, select(temp, age, zip, total))
+        d <- rbind(d, temp)
         
     }
     
-    d$zip <- factor(d$zip)
-    gg <- ggplot(d, aes(x = age, y = total))
-    gg + geom_bar(stat = "identity") + facet_wrap( ~ zip) + coord_flip() + theme_bw()
+    gg <- ggplot(d, aes(x = age, y = count))
+    gg + geom_bar(stat = "identity") + facet_grid(gender ~ zip) + coord_flip() + theme_bw()
     
 }
 
@@ -50,9 +50,9 @@ demo <- function(zip) {
     d$age <- factor(d$age, levels = d$age)
     d$total <- d$male + d$female
     d$zip <- zip
+    
+    d <- melt(d, id = c("age", "zip"), measure.vars = c("male", "female"), variable.name = "gender", value.name = "count")
     d
-
-    #dMelt <- melt(d, id = "age", variable.name = "gender", value.name = "count")
     #gg <- ggplot(data = dMelt, aes(x = age, y = count))
     #gg + geom_bar(stat = "identity", aes(fill = gender)) + coord_flip() + facet_grid(. ~ gender, scales = "free_y") + ggtitle(zip)
     
